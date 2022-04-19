@@ -1,0 +1,33 @@
+﻿
+@model WebSoftube.ViewModels.ProductViewModel
+
+<div>
+    <h1 class="display-4 text-left">Products</h1>
+    <form asp-controller="Product" asp-action="GetByName" method="post">
+        <p>
+            Title: <input type="text" name="name" />
+            <input type="submit" value="Search" />
+        </p>
+    </form>
+    <div class="table-responsive-sm">
+        <table class="table">
+            <tbody>
+                @foreach (var product in Model.result)
+                {
+                    <tr>
+
+                        <td class="text-left">
+                            @product.name
+                        </td>
+
+                        <td class="p-0 text-right">
+                            <img  src="@product.images.w240" alt="Product image" />
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
