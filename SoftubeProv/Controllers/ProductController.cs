@@ -37,8 +37,7 @@ namespace SoftubeProv.Controllers
         public IActionResult GetProductByName(string name)
         {
             //var product = _repository.GetProductByName(name);
-
-            var product = _repository.GetAllProducts().Result.result.FirstOrDefault(x => x.name == name);
+            var product = _repository.GetAllProducts().Result.result.FirstOrDefault(x => x.name.ToLower().Trim() == name.ToLower().Trim());
 
             if (product != null)
             {
