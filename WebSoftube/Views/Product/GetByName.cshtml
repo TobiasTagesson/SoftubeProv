@@ -1,23 +1,14 @@
 ﻿@model Result
 
-    <a href="javascript:void(0);" onclick="history.go(-1);">Back to Products</a>
-
 <div class="text-center">
-    @if (Model!= null)
-    {
     <h1 class="display-4">@Model.name</h1>
     <div class="table-responsive-sm">
         <table class="table">
             <tbody>
                 <tr>
-                    <td class="p-0"><img src="@Model.images.W480" alt="Product image" /></td>
+                    <td class="p-0"><img src="@Model.images.w480" alt="Product image" /></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    }
-            else
-            {
-                <h1>Not Found</h1>
-            }
 </div>

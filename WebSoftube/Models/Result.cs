@@ -8,7 +8,6 @@ namespace WebSoftube.Models
 {
     public class Result
     {
-
         public string id { get; set; }
         public string name { get; set; }
         // public string fullProductId { get; set; }
@@ -24,6 +23,8 @@ namespace WebSoftube.Models
         //// public string[] EcoSystems { get; set; }
         // public List<Price> price { get; set; }
         public Images images { get; set; }
+
+
     }
 
     public class Price
@@ -37,13 +38,13 @@ namespace WebSoftube.Models
     public class Images
     {
         [JsonPropertyName("240w")]
-        public string W240 { get; set; }
+        public string w240 { get; set; }
 
         [JsonPropertyName("480w")]
-        public string W480 { get; set; }
+        public string w480 { get; set; }
 
         [JsonPropertyName("640w")]
-        public string W640 { get; set; }
+        public string w640 { get; set; }
     }
 }
 
