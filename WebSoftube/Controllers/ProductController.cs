@@ -14,9 +14,9 @@ namespace WebSoftube.Controllers
     public class ProductController : Controller
     {
 
-        string path = "https://localhost:44396/api/product/";
+        readonly string path = "https://localhost:44396/api/product/";
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
 
             using (var client = new HttpClient())
@@ -25,12 +25,22 @@ namespace WebSoftube.Controllers
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = await client.GetStringAsync(path + "getallproducts");
+                HttpResponseMessage response = await client.GetAsync(path + "getallproducts");
 
-                var vm =  JsonSerializer.Deserialize<ProductViewModel>(response);
-                return View(vm);
+                var vm = new ProductViewModel();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    int pageSize = 10;
+                    string apiRes = await response.Content.ReadAsStringAsync();
+                    vm = JsonSerializer.Deserialize<ProductViewModel>(apiRes);
+                    return View(PaginatedList<Result>.CreatePagination(vm.result, pageNumber ?? 1, pageSize));
+                }
+                else
+                {
+                    return View();
+                }
             }
-
         }
 
         public async Task<IActionResult> GetByName(string name)
@@ -42,11 +52,20 @@ namespace WebSoftube.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var itemJson = JsonSerializer.Serialize(name);
-                var response = await client.GetStringAsync(path + "getproductbyname?name=" + name);
+                HttpResponseMessage response = await client.GetAsync(path + "getproductbyname?name=" + name);
 
-                var vm = JsonSerializer.Deserialize<Result>(response);
+                Result res = new Result();
+                if (response.IsSuccessStatusCode)
+                {
+                    string apiRes = await response.Content.ReadAsStringAsync();
+                     res = JsonSerializer.Deserialize<Result>(apiRes);
+                  return View(res);
+                }
+                else
+                {
+                    return View();
+                }
 
-                return View(vm);
             }
 
         }

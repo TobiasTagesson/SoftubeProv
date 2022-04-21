@@ -14,18 +14,10 @@ namespace SoftubeProv.Models
 {
     public class ProductRepository : IProductRepository
     {
-       // private readonly IProductRepository _productRepository;
 
-      //  static HttpClient client = new HttpClient();
         string path = "https://cdn.softube.com/api/v1/products?pageSize=500";
 
-        //public ProductRepository(IProductRepository productRepository)
-        //{
-        //    _productRepository = productRepository;
-        //}
-
         public async Task<Product> GetAllProducts()
-       // public async Task<List<Result>> GetAllProducts()
         {
 
             using (var client = new HttpClient())
@@ -40,23 +32,6 @@ namespace SoftubeProv.Models
                 return  JsonSerializer.Deserialize<Product>(response);
 
             }
-
-            //using (var client = new HttpClient())
-            //{
-            //    Product product = new Product(); 
-            //    client.BaseAddress = new Uri("http://localhost:64042");
-            //    client.DefaultRequestHeaders.Accept.Clear();
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //    HttpResponseMessage response = await client.GetAsync(path);
-
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        product = await response.Content.ReadAsAsync<Product>();
-            //    }
-            //    return product;
-            //}
-
         }
 
         public Product GetProductByName(string name)
