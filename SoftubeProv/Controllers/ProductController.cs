@@ -30,22 +30,30 @@ namespace SoftubeProv.Controllers
             else
             {
                 return NotFound();
-            } 
+            }
         }
 
         [HttpGet]
         public IActionResult GetProductByName(string name)
         {
-            //var product = _repository.GetProductByName(name);
-            var product = _repository.GetAllProducts().Result.result.FirstOrDefault(x => x.name.ToLower().Trim() == name.ToLower().Trim());
-
-            if (product != null)
+            Result product = new Result(); ;
+            if (String.IsNullOrEmpty(name))
             {
-                return Ok(product);
+                return NotFound();
             }
             else
             {
-                return NotFound();
+
+                product = _repository.GetAllProducts().Result.result.FirstOrDefault(x => x.name.ToLower().Trim() == name.ToLower().Trim());
+
+                if (product != null)
+                {
+                    return Ok(product);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
         }
     }

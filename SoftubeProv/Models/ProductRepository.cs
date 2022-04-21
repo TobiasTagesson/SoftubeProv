@@ -15,7 +15,7 @@ namespace SoftubeProv.Models
     public class ProductRepository : IProductRepository
     {
 
-        string path = "https://cdn.softube.com/api/v1/products?pageSize=500";
+        readonly string path = "https://cdn.softube.com/api/v1/products?pageSize=500";
 
         public async Task<Product> GetAllProducts()
         {
@@ -26,17 +26,22 @@ namespace SoftubeProv.Models
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                HttpResponseMessage response = await client.GetAsync(path);
 
-                var response = await client.GetStringAsync(path);
-
-                return  JsonSerializer.Deserialize<Product>(response);
-
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<Product>(result);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
         public Product GetProductByName(string name)
         {
-            
 
             using (var client = new HttpClient())
             {

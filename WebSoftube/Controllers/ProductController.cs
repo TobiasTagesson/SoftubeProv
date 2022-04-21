@@ -54,12 +54,11 @@ namespace WebSoftube.Controllers
                 var itemJson = JsonSerializer.Serialize(name);
                 HttpResponseMessage response = await client.GetAsync(path + "getproductbyname?name=" + name);
 
-                Result res = new Result();
                 if (response.IsSuccessStatusCode)
                 {
                     string apiRes = await response.Content.ReadAsStringAsync();
-                     res = JsonSerializer.Deserialize<Result>(apiRes);
-                  return View(res);
+                    Result res = JsonSerializer.Deserialize<Result>(apiRes);
+                    return View(res);
                 }
                 else
                 {

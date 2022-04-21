@@ -7,7 +7,6 @@ namespace SoftubeProv.Models
 {
     public interface IProductRepository
     {
-        //  Task<List<Product>> GetAllProducts();
         Task<Product> GetAllProducts();
         Product GetProductByName(string name);
     }

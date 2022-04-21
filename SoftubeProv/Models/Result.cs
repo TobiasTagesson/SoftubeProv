@@ -23,8 +23,6 @@ namespace SoftubeProv.Models
         //// public string[] EcoSystems { get; set; }
         // public List<Price> price { get; set; }
         public Images images { get; set; }
-
-
     }
 
     public class Price
@@ -38,13 +36,13 @@ namespace SoftubeProv.Models
     public class Images
     {
         [JsonPropertyName("240w")]
-        public string w240 { get; set; }
+        public string W240 { get; set; }
 
         [JsonPropertyName("480w")]
-        public string w480 { get; set; }
+        public string W480 { get; set; }
 
         [JsonPropertyName("640w")]
-        public string w640 { get; set; }
+        public string W640 { get; set; }
     }
 
 }
