@@ -1,6 +1,6 @@
 ﻿@model Result
 
-    <a href="javascript:void(0);" onclick="history.go(-1);">Back to Products</a>
+    <a href="javascript:void(0);" onclick="history.go(-1);">Go Back</a>
 
 <div class="text-center">
     @if (Model!= null)
@@ -16,8 +16,9 @@
         </table>
     </div>
     }
-            else
-            {
-                <h1>Not Found</h1>
-            }
+
+    else
+    {
+        <h1>Not Found</h1>
+    }
 </div>

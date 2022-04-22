@@ -7,6 +7,6 @@ namespace SoftubeProv.Models
     public class Product
     {  
         public int totalResults { get; set; }
-        public List<Result> result { get; set; }
+        public IEnumerable<Result> result { get; set; }
     }
 }

@@ -30,9 +30,6 @@ namespace SoftubeProv
        
 
             services.AddControllers();
-            //services.AddControllers()
-            //.AddJsonOptions(o => o.JsonSerializerOptions
-            //    .ReferenceHandler = ReferenceHandler.Preserve);
 
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSwaggerGen(c =>

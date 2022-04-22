@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
-//using Newtonsoft.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Net.Http.Json;
@@ -38,27 +37,6 @@ namespace SoftubeProv.Models
                     return null;
                 }
             }
-        }
-
-        public Product GetProductByName(string name)
-        {
-
-            using (var client = new HttpClient())
-            {
-                StringContent content = new StringContent(name, Encoding.UTF8, "application/json");
-
-                var requestBodyAsString = JsonSerializer.Serialize(name);
-
-                var jsonString = string.Empty;
-
-                using (var response = client.PostAsync(path, content).Result)
-                {
-                    jsonString = response.Content.ReadAsStringAsync().Result;
-                }
-
-            }
-
-            throw new NotImplementedException();
         }
     }
 }

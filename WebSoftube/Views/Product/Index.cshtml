@@ -5,7 +5,7 @@
 
 <div>
     <h1 class="display-4 text-left">Products</h1>
-    <form id="searchForm" class="text-right" asp-controller="Product" asp-action="GetByName" method="get">
+    <form id="searchForm" class="text-right" asp-controller="Product" asp-action="SearchForProduct" method="get">
         <p>
             Search by name: <input type="text" name="name" />
             <input type="submit" value="Search" />
@@ -20,17 +20,16 @@
                 <tbody>
                     @foreach (var product in Model)
                     {
-                        <tr style="cursor: pointer" onclick="location.href = '@(Url.Action("GetByName", "Product", new { name = product.name }))'">
+                        <tr style="cursor: pointer" onclick="location.href = '@(Url.Action("ShowProduct", "Product", new { name = product.name }))'">
                             <td id="title" class="text-left font-weight-bold">
                                 @product.name
-                            </td>
+                            </td>   
 
-                            <td class="p-0 text-right">
-                                <img class="img-fluid" src="@product.images.W240" alt="Product image" />
+                            <td id="resize" class="p-0 text-right">
+                                <img  class="img-fluid" src="@product.images.W240" alt="Product image" />
                             </td>
                         </tr>
                     }
-
                 </tbody>
             </table>
 
@@ -50,10 +49,7 @@
                class="btn btn-default @nextDisabled">
                 Next
             </a>
-
-
         </div>
     }
-
 </div>
 

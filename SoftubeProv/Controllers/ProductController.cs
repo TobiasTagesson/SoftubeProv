@@ -34,22 +34,46 @@ namespace SoftubeProv.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProductByName(string name)
+        public IActionResult SearchForProductByName(string name)
         {
-            Result product = new Result(); ;
             if (String.IsNullOrEmpty(name))
             {
                 return NotFound();
             }
             else
             {
+                Product product = new Product();
+                var texts = name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(t => t.ToLower());
+                product.result = _repository.GetAllProducts().Result.result.Where(x => texts.All(t => x.name.ToLower().Contains(t)));
 
-                product = _repository.GetAllProducts().Result.result.FirstOrDefault(x => x.name.ToLower().Trim() == name.ToLower().Trim());
+                if (product != null)
+                {
+                    return Ok(product);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetProductByName(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                return NotFound();
+            }
+
+            else
+            {
+                var product = _repository.GetAllProducts().Result.result.FirstOrDefault(x => x.name == name);
 
                 if (product != null)
                 {
                     return Ok(product);
                 }
+
                 else
                 {
                     return NotFound();

@@ -1,0 +1,28 @@
+﻿@model WebSoftube.ViewModels.ProductViewModel;
+
+
+    <h1 class="display-4 text-left">Search Results</h1>
+    <form id="searchForm" class="text-right" asp-controller="Product" asp-action="SearchForProduct" method="get">
+        <p>
+            Search by name: <input type="text" name="name" />
+            <input type="submit" value="Search" />
+        </p>
+    </form> 
+    <div class="table-responsive-sm">
+        <table class="table table-hover">
+            <tbody>
+                @foreach (var product in Model.result)
+                {
+                    <tr style="cursor: pointer" onclick="location.href = '@(Url.Action("ShowProduct", "Product", new { name = product.name }))'">
+                        <td id="title" class="text-left font-weight-bold">
+                            @product.name
+                        </td>
+
+                        <td id="resize" class="p-0 text-right">
+                            <img class="img-fluid" src="@product.images.W240" alt="Product image" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
